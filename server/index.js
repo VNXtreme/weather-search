@@ -1,10 +1,23 @@
 const axios = require('axios');
 const express = require('express');
 const app = express();
+const cors = require('cors')
+
 const PORT = process.env.PORT;
 const { getLocationList, getLocationWeather } = require('./services/metaWeather');
 
+/**
+ * Default URL for axios
+ */
 axios.defaults.baseURL = process.env.API_DOMAIN;
+
+/**
+ * Setup CORS, only allow Frontend's domain
+ */
+var corsOptions = {
+	origin: process.env.FRONTEND_DOMAIN,
+}
+app.use(cors(corsOptions))
 
 /**
  * Get the list of location
