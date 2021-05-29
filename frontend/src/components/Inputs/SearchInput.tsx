@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, FormControl, InputGroup } from 'react-bootstrap';
 import SearchIcon from '../Icons/SearchIcon';
 
