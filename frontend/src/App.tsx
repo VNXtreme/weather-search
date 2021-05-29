@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
-import locationSearchApi from 'api/metaWeatherApi';
-import SearchInput from 'components/Inputs/SearchInput';
+import SearchInput from 'components/SearchInput';
 
 function App() {
-  useEffect(() => {
-    let cities = locationSearchApi('london');
-  }, []);
-
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
   return (
     <Container>
-      <Form autoComplete="off">
-        <Row md={4}>
-          <Col>
+      <Form autoComplete="off" onSubmit={handleSubmit}>
+        <Row>
+          <Col md={4}>
             <SearchInput />
           </Col>
         </Row>

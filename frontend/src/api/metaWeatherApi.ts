@@ -1,11 +1,16 @@
 import axios from "axios";
 import { LocationType } from "types/MetaWeatherType";
 
-const locationSearchApi = async (location: string = ''): Promise<LocationType[]> => {
+export const locationSearchApi = async (location: string = ''): Promise<LocationType[]> => {
 	let { data } = await axios.get('/location/', {
-		params: { query: location }
+		params: { name: location }
 	});
 	return data;
 }
 
-export default locationSearchApi;
+export const locationWeatherApi = async (woeid: number): Promise<LocationType[]> => {
+	let { data } = await axios.get('/location/', {
+		params: { woeid }
+	});
+	return data;
+}
