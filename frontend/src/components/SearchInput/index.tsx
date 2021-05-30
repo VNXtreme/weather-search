@@ -1,45 +1,13 @@
-import React, { useState } from 'react';
-import { locationSearchApi } from 'api/metaWeatherApi';
-import { ILocation } from 'types/MetaWeatherType';
-import { debounce } from 'utils/functionHelper';
+import React from 'react';
 import { Autocomplete } from '@material-ui/lab';
 import { FormControl, TextField } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
+import useSearchLocation from 'hooks/useSearchLocation';
 
 const SearchInput: React.FC<{
   locationSelect: (woeid: number) => void;
 }> = ({ locationSelect }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [locations, setLocations] = useState<ILocation[]>([]);
-  const { enqueueSnackbar } = useSnackbar();
-
-  const handleOnsearch = debounce(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      let text = e.target.value;
-      if (!text) return;
-      try {
-        setIsLoading(true);
-        const result = await locationSearchApi(text);
-        setLocations(result);
-      } catch (error) {
-        const errorMsg = error.response.data;
-        enqueueSnackbar(
-          <span dangerouslySetInnerHTML={{ __html: errorMsg }}></span>,
-          { variant: 'error' }
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    500
-  );
-
-  const handleOnchange = (
-    e: React.ChangeEvent<{}>,
-    value: ILocation | null
-  ) => {
-    if (value) locationSelect(value.woeid);
-  };
+  const { isLoading, locations, handleOnsearch, handleOnchange } =
+    useSearchLocation({ locationSelect });
 
   return (
     <FormControl fullWidth={true}>
