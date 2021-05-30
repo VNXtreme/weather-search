@@ -1,17 +1,42 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, { FC } from 'react';
+import { ConsolidatedWeather } from 'types/MetaWeatherType';
+import './style.scss';
 
-export default function WeatherCard() {
+const dayofWeek = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
+type WeatherCardPropType = Pick<
+  ConsolidatedWeather,
+  'applicable_date' | 'max_temp' | 'min_temp' | 'weather_state_abbr'
+>;
+
+const WeatherCard: FC<WeatherCardPropType> = ({
+  applicable_date,
+  max_temp,
+  min_temp,
+  weather_state_abbr,
+}) => {
+  const dayLabel = dayofWeek[new Date(applicable_date).getDay()];
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <dl className="border border-warning p-3">
+      <dt>{dayLabel}</dt>
+      <dd>Max: {Math.round(max_temp)}</dd>
+      <dd>Min: {Math.round(min_temp)}</dd>
+      <dd>
+        <img
+          src={`${process.env.REACT_APP_ASSET_DOMAIN}/${weather_state_abbr}.svg`}
+          alt=""
+          height="40"
+        />
+      </dd>
+    </dl>
   );
-}
+};
+export default WeatherCard;
