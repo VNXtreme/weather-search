@@ -8,6 +8,7 @@ type WeatherDashboardPropsType = {
   data: LocationWeatherType;
   isLoading: boolean;
 };
+
 const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
   data,
   isLoading,
@@ -23,18 +24,11 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
       )}
       <Fade in={!isLoading}>
         <Grid container={true} spacing={2} className={classes.root}>
-          {forecastWeather.map(
-            ({ applicable_date, min_temp, max_temp, weather_state_abbr }) => (
-              <Grid key={applicable_date} item={true} xs={6} md>
-                <WeatherCard
-                  applicable_date={applicable_date}
-                  weather_state_abbr={weather_state_abbr}
-                  max_temp={max_temp}
-                  min_temp={min_temp}
-                />
-              </Grid>
-            )
-          )}
+          {forecastWeather.map((weatherData, i) => (
+            <Grid key={weatherData.applicable_date} item={true} xs={6} md>
+              <WeatherCard weatherData={weatherData} />
+            </Grid>
+          ))}
         </Grid>
       </Fade>
     </>

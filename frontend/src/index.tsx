@@ -6,8 +6,19 @@ import axios from 'axios';
 import globalTheme from 'GlobalTheme';
 import { ThemeProvider, CssBaseline } from '@material-ui/core';
 import { SnackbarProvider } from 'notistack';
+import moment from 'moment';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_DOMAIN;
+moment.updateLocale('en', {
+  calendar: {
+    lastDay: '[Yesterday]',
+    sameDay: '[Today]',
+    nextDay: '[Tomorrow]',
+    lastWeek: '[Last] dddd',
+    nextWeek: 'dddd',
+    sameElse: 'L',
+  },
+});
 
 ReactDOM.render(
   <ThemeProvider theme={globalTheme}>

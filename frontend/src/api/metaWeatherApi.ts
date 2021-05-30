@@ -1,7 +1,7 @@
 import axios from "axios";
-import { LocationType, LocationWeatherType } from "types/MetaWeatherType";
+import { ILocation, LocationWeatherType } from "types/MetaWeatherType";
 
-export const locationSearchApi = async (location: string = ''): Promise<LocationType[]> => {
+export const locationSearchApi = async (location: string = ''): Promise<ILocation[]> => {
 	let { data } = await axios.get('/location/', {
 		params: { name: location }
 	});

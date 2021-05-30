@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { locationSearchApi } from 'api/metaWeatherApi';
-import { LocationType } from 'types/MetaWeatherType';
-import { debounce } from 'utils/helper';
+import { ILocation } from 'types/MetaWeatherType';
+import { debounce } from 'utils/functionHelper';
 import { Autocomplete } from '@material-ui/lab';
 import { FormControl, TextField } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
@@ -10,7 +10,7 @@ const SearchInput: React.FC<{
   locationSelect: (woeid: number) => void;
 }> = ({ locationSelect }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [locations, setLocations] = useState<LocationType[]>([]);
+  const [locations, setLocations] = useState<ILocation[]>([]);
   const { enqueueSnackbar } = useSnackbar();
 
   const handleOnsearch = debounce(
@@ -36,7 +36,7 @@ const SearchInput: React.FC<{
 
   const handleOnchange = (
     e: React.ChangeEvent<{}>,
-    value: LocationType | null
+    value: ILocation | null
   ) => {
     if (value) locationSelect(value.woeid);
   };
