@@ -25,21 +25,23 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
   const forecastWeather = data.slice(1);
   return (
     <Box marginTop={4}>
-      {todayWeather && (
-        <Grid container={true} justify="flex-end" className={classes.root}>
-          <Grid item={true}>
-            <WeatherToday weatherData={todayWeather} />
-          </Grid>
-        </Grid>
-      )}
       {isLoading && (
         <Box margin={3} textAlign="center">
           <CircularProgress />
         </Box>
       )}
-      <Fade in={!isLoading}>
-        <Grid container={true} spacing={2}>
-          {forecastWeather.length > 0 && (
+      {todayWeather && (
+        <Fade in={!isLoading}>
+          <Grid container={true} justify="flex-end" className={classes.root}>
+            <Grid item={true}>
+              <WeatherToday weatherData={todayWeather} />
+            </Grid>
+          </Grid>
+        </Fade>
+      )}
+      {forecastWeather.length > 0 && (
+        <Fade in={!isLoading}>
+          <Grid container={true} spacing={2}>
             <>
               <Grid item xs={12}>
                 <Typography variant="h6">5-day forecast:</Typography>
@@ -57,9 +59,9 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
                 </Grid>
               ))}
             </>
-          )}
-        </Grid>
-      </Fade>
+          </Grid>
+        </Fade>
+      )}
     </Box>
   );
 };
