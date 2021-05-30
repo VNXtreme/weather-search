@@ -1,5 +1,7 @@
+import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
 import React, { FC } from 'react';
 import { ConsolidatedWeather } from 'types/MetaWeatherType';
+import useStyle from './styles';
 
 const dayofWeek = [
   'Sunday',
@@ -23,19 +25,26 @@ const WeatherCard: FC<WeatherCardPropType> = ({
   weather_state_abbr,
 }) => {
   const dayLabel = dayofWeek[new Date(applicable_date).getDay()];
+  const classes = useStyle();
   return (
-    <dl className="gradient-pink rounded p-3">
-      <dt>{dayLabel}</dt>
-      <dd>Max: {Math.round(max_temp)}</dd>
-      <dd>Min: {Math.round(min_temp)}</dd>
-      <dd>
-        <img
-          src={`${process.env.REACT_APP_ASSET_DOMAIN}/${weather_state_abbr}.svg`}
-          alt=""
-          height="40"
-        />
-      </dd>
-    </dl>
+    <Card className={classes.root}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography variant="h6">{dayLabel}</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Max: {Math.round(max_temp)}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Min: {Math.round(min_temp)}
+          </Typography>
+        </CardContent>
+      </div>
+      <CardMedia
+        className={classes.cover}
+        image={`${process.env.REACT_APP_ASSET_DOMAIN}/${weather_state_abbr}.svg`}
+        title="Live from space album cover"
+      />
+    </Card>
   );
 };
 export default WeatherCard;

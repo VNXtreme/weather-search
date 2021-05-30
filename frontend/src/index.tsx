@@ -10,17 +10,15 @@ import { SnackbarProvider } from 'notistack';
 axios.defaults.baseURL = process.env.REACT_APP_API_DOMAIN;
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={globalTheme}>
-      <CssBaseline />
-      <SnackbarProvider
-        maxSnack={3}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      >
-        <App />
-      </SnackbarProvider>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={globalTheme}>
+    <CssBaseline />
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    >
+      <App />
+    </SnackbarProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

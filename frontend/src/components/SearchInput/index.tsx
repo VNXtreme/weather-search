@@ -3,7 +3,7 @@ import { locationSearchApi } from 'api/metaWeatherApi';
 import { LocationType } from 'types/MetaWeatherType';
 import { debounce } from 'utils/helper';
 import { Autocomplete } from '@material-ui/lab';
-import { CircularProgress, FormControl, TextField } from '@material-ui/core';
+import { FormControl, TextField } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 
 const SearchInput: React.FC<{
@@ -11,8 +11,8 @@ const SearchInput: React.FC<{
 }> = ({ locationSelect }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [locations, setLocations] = useState<LocationType[]>([]);
-
   const { enqueueSnackbar } = useSnackbar();
+
   const handleOnsearch = debounce(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       let text = e.target.value;
