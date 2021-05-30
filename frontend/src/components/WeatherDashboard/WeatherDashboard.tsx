@@ -27,12 +27,17 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
     <Box marginTop={4}>
       {isLoading && (
         <Box margin={3} textAlign="center">
-          <CircularProgress />
+          <CircularProgress data-testid="loadingSpinner" />
         </Box>
       )}
       {todayWeather && (
         <Fade in={!isLoading}>
-          <Grid container={true} justify="flex-end" className={classes.root}>
+          <Grid
+            container={true}
+            justify="flex-end"
+            className={classes.root}
+            data-testid="todayWeather"
+          >
             <Grid item={true}>
               <WeatherToday weatherData={todayWeather} />
             </Grid>
@@ -41,7 +46,7 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
       )}
       {forecastWeather.length > 0 && (
         <Fade in={!isLoading}>
-          <Grid container={true} spacing={2}>
+          <Grid container={true} spacing={2} data-testid="forecastWeather">
             <>
               <Grid item xs={12}>
                 <Typography variant="h6">5-day forecast:</Typography>
