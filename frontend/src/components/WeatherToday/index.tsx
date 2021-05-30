@@ -10,7 +10,7 @@ const WeatherToday: FC<WeatherTodayPropsType> = ({ weatherData }) => {
   return (
     <>
       <Typography variant="h5">
-        Current: {Math.round(weatherData.the_temp)}°C
+        Today: {Math.round(weatherData.the_temp)}°C
       </Typography>
       <Box
         display="flex"
