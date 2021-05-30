@@ -1,21 +1,18 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-		justifyContent: 'center',
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
   content: {
-    flex: '1 0 auto',
-		padding: '0.8rem 0.8rem 0.8rem 0',
+    flex: '1 1 auto',
   },
-  cover: {
-		width: 60,
-		backgroundSize: 'contain'
+  media: {
+    textAlign: 'center',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    padding: '0.4rem',
+    [theme.breakpoints.up('sm')]: {
+      padding: '1rem',
+    },
   },
 }));
 export default useStyle;

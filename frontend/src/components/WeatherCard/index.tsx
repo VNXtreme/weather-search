@@ -1,4 +1,10 @@
-import { Card, CardContent, CardMedia, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import moment from 'moment';
 import React, { FC } from 'react';
 import { IConsolidatedWeather } from 'types/MetaWeatherType';
@@ -19,25 +25,29 @@ const WeatherCard: FC<WeatherCardPropsType> = ({ weatherData }) => {
   } = weatherData;
 
   return (
-    <Card className={classes.root}>
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography variant="h6">
-            {moment(applicable_date).calendar()}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Max: {Math.round(max_temp)}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Min: {Math.round(min_temp)}
-          </Typography>
-        </CardContent>
-      </div>
-      <CardMedia
-        className={classes.cover}
-        image={`${process.env.REACT_APP_ASSET_DOMAIN}/${weather_state_abbr}.svg`}
-        title={weather_state_name}
-      />
+    <Card>
+      <Grid container={true}>
+        <Grid item={true} xs={8}>
+          <CardContent>
+            <Typography color="primary" variant="subtitle1">
+              {moment(applicable_date).calendar()}
+            </Typography>
+            <Typography variant="subtitle2" color="textSecondary">
+              Max: {Math.round(max_temp)}
+            </Typography>
+            <Typography variant="subtitle2" color="textSecondary">
+              Min: {Math.round(min_temp)}
+            </Typography>
+          </CardContent>
+        </Grid>
+        <Grid className={classes.media} item={true} xs={4}>
+          <img
+            src={`${process.env.REACT_APP_ASSET_DOMAIN}/${weather_state_abbr}.svg`}
+            alt={weather_state_name}
+          />
+          <small>{weather_state_name}</small>
+        </Grid>
+      </Grid>
     </Card>
   );
 };

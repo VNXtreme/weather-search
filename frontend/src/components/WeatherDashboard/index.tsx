@@ -25,7 +25,13 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
       <Fade in={!isLoading}>
         <Grid container={true} spacing={2} className={classes.root}>
           {forecastWeather.map((weatherData, i) => (
-            <Grid key={weatherData.applicable_date} item={true} xs={6} md>
+            <Grid
+              key={weatherData.applicable_date}
+              item={true}
+              xs={6}
+              sm={4}
+              md
+            >
               <WeatherCard weatherData={weatherData} />
             </Grid>
           ))}
