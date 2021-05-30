@@ -1,12 +1,6 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-} from '@material-ui/core';
+import { Card, CardContent, Grid, Typography } from '@material-ui/core';
 import moment from 'moment';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { IConsolidatedWeather } from 'types/MetaWeatherType';
 import useStyle from './styles';
 

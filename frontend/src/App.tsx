@@ -49,7 +49,10 @@ function App() {
           </Grid>
         </Grid>
 
-        <WeatherDashboard isLoading={isLoading} data={locationWeather} />
+        <WeatherDashboard
+          isLoading={isLoading}
+          data={locationWeather.consolidated_weather}
+        />
       </Container>
     </>
   );

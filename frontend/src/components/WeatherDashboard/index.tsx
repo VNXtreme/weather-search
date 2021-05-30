@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Box, CircularProgress, Fade, Grid } from '@material-ui/core';
 import WeatherCard from 'components/WeatherCard';
-import { LocationWeatherType } from 'types/MetaWeatherType';
+import { IConsolidatedWeather } from 'types/MetaWeatherType';
 import useStyle from './styles';
 
 type WeatherDashboardPropsType = {
-  data: LocationWeatherType;
+  data: IConsolidatedWeather[];
   isLoading: boolean;
 };
 
@@ -14,7 +14,7 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
   isLoading,
 }) => {
   const classes = useStyle();
-  const forecastWeather = data.consolidated_weather.slice(1);
+  const forecastWeather = data.slice(1);
   return (
     <>
       {isLoading && (
