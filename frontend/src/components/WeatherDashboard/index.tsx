@@ -1,8 +1,15 @@
 import { FC } from 'react';
-import { Box, CircularProgress, Fade, Grid } from '@material-ui/core';
+import {
+  Box,
+  CircularProgress,
+  Fade,
+  Grid,
+  Typography,
+} from '@material-ui/core';
 import WeatherCard from 'components/WeatherCard';
 import { IConsolidatedWeather } from 'types/MetaWeatherType';
 import useStyle from './styles';
+import WeatherToday from 'components/WeatherToday';
 
 type WeatherDashboardPropsType = {
   data: IConsolidatedWeather[];
@@ -14,30 +21,46 @@ const WeatherDashboard: FC<WeatherDashboardPropsType> = ({
   isLoading,
 }) => {
   const classes = useStyle();
+  const todayWeather = data[0];
   const forecastWeather = data.slice(1);
   return (
-    <>
+    <Box marginTop={4}>
+      {todayWeather && (
+        <Grid container={true} justify="flex-end" className={classes.root}>
+          <Grid item={true}>
+            <WeatherToday weatherData={todayWeather} />
+          </Grid>
+        </Grid>
+      )}
       {isLoading && (
         <Box margin={3} textAlign="center">
           <CircularProgress />
         </Box>
       )}
       <Fade in={!isLoading}>
-        <Grid container={true} spacing={2} className={classes.root}>
-          {forecastWeather.map((weatherData, i) => (
-            <Grid
-              key={weatherData.applicable_date}
-              item={true}
-              xs={6}
-              sm={4}
-              md
-            >
-              <WeatherCard weatherData={weatherData} />
-            </Grid>
-          ))}
+        <Grid container={true} spacing={2}>
+          {forecastWeather.length > 0 && (
+            <>
+              <Grid item xs={12}>
+                <Typography variant="h6">5-day forecast:</Typography>
+              </Grid>
+
+              {forecastWeather.map((weatherData, i) => (
+                <Grid
+                  key={weatherData.applicable_date}
+                  item={true}
+                  xs={6}
+                  sm={4}
+                  md
+                >
+                  <WeatherCard weatherData={weatherData} />
+                </Grid>
+              ))}
+            </>
+          )}
         </Grid>
       </Fade>
-    </>
+    </Box>
   );
 };
 export default WeatherDashboard;

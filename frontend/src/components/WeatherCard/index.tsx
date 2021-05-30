@@ -27,10 +27,10 @@ const WeatherCard: FC<WeatherCardPropsType> = ({ weatherData }) => {
               {moment(applicable_date).calendar()}
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
-              Max: {Math.round(max_temp)}
+              Max: {Math.round(max_temp)}°C
             </Typography>
             <Typography variant="subtitle2" color="textSecondary">
-              Min: {Math.round(min_temp)}
+              Min: {Math.round(min_temp)}°C
             </Typography>
           </CardContent>
         </Grid>
