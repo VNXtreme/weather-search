@@ -5,7 +5,7 @@ type NavbarType = {
   title?: string;
 };
 
-const Navbar: FC<NavbarType> = ({ title = 'Weather Search' }) => {
+const Navbar: FC<NavbarType> = ({ title = 'Weather Forecast' }) => {
   return (
     <AppBar position="static">
       <Box paddingX={2} paddingY={1}>
