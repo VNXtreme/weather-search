@@ -1,16 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import globalTheme from 'GlobalTheme';
+import { ThemeProvider, CssBaseline } from '@material-ui/core';
+import { SnackbarProvider } from 'notistack';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_DOMAIN;
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={globalTheme}>
+      <CssBaseline />
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <App />
+      </SnackbarProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

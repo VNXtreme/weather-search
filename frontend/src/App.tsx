@@ -1,13 +1,13 @@
-import { createContext, useEffect, useState } from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
 import SearchInput from 'components/SearchInput';
 import WeatherCard from 'components/WeatherCard';
 import { locationWeatherApi } from 'api/metaWeatherApi';
 import { LocationWeatherType } from 'types/MetaWeatherType';
-
-const AppContext = createContext({});
+import { AppBar, Container, Grid, Typography } from '@material-ui/core';
+import Navbar from 'components/Navbar';
 
 function App() {
+  const [isLoading, setLoading] = useState(false);
   const [locationWeather, setlocationWeather] = useState<LocationWeatherType>({
     consolidated_weather: [],
     time: '',
@@ -28,37 +28,41 @@ function App() {
   };
 
   const onLocationSelect = async (woeid: number) => {
-    let result = await locationWeatherApi(woeid);
-    setlocationWeather(result);
+    try {
+      setLoading(true);
+      let result = await locationWeatherApi(woeid);
+      setlocationWeather(result);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <Container className="py-5">
-      <Form autoComplete="off" onSubmit={handleSubmit}>
-        <Row>
-          <Col md={6}>
+    <>
+      <Navbar />
+      <Container>
+        <Grid container={true}>
+          <Grid item={true} xs={12} md={6}>
             <SearchInput locationSelect={onLocationSelect} />
-          </Col>
-        </Row>
+          </Grid>
 
-        <Row className="flex-wrap flex-md-nowrap mt-5">
           {locationWeather.consolidated_weather
             .filter((_, i) => i < 5)
             .map(
               ({ applicable_date, min_temp, max_temp, weather_state_abbr }) => (
-                <Col xs={12} md>
-                  <WeatherCard
-                    applicable_date={applicable_date}
-                    weather_state_abbr={weather_state_abbr}
-                    max_temp={max_temp}
-                    min_temp={min_temp}
-                  />
-                </Col>
+                <WeatherCard
+                  applicable_date={applicable_date}
+                  weather_state_abbr={weather_state_abbr}
+                  max_temp={max_temp}
+                  min_temp={min_temp}
+                />
               )
             )}
-        </Row>
-      </Form>
-    </Container>
+        </Grid>
+      </Container>
+    </>
   );
 }
 

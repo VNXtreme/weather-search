@@ -1,8 +1,8 @@
-import { SVGProps } from 'react';
+import { SvgIcon, SvgIconProps } from '@material-ui/core';
 
-export default function SearchIcon(props: SVGProps<SVGSVGElement>) {
+export default function SearchIcon(props: SvgIconProps) {
   return (
-    <svg
+    <SvgIcon
       {...props}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -24,6 +24,6 @@ export default function SearchIcon(props: SVGProps<SVGSVGElement>) {
         transform="translate(3 3)"
         xlinkHref="#svgsearch"
       />
-    </svg>
+    </SvgIcon>
   );
 }

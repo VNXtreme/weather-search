@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { ConsolidatedWeather } from 'types/MetaWeatherType';
-import './style.scss';
 
 const dayofWeek = [
   'Sunday',
@@ -25,7 +24,7 @@ const WeatherCard: FC<WeatherCardPropType> = ({
 }) => {
   const dayLabel = dayofWeek[new Date(applicable_date).getDay()];
   return (
-    <dl className="border border-warning p-3">
+    <dl className="gradient-pink rounded p-3">
       <dt>{dayLabel}</dt>
       <dd>Max: {Math.round(max_temp)}</dd>
       <dd>Min: {Math.round(min_temp)}</dd>
